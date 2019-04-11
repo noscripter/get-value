@@ -17,7 +17,8 @@
     "node": ">=6.0"
   },
   "scripts": {
-    "test": "nyc --reporter=text --reporter=html mocha"
+    "test": "nyc --reporter=text --reporter=html mocha",
+    "benchmark": "node benchmark/index.js"
   },
   "dependencies": {
     "isobject": "^3.0.1"
