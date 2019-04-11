@@ -63,18 +63,18 @@ module.exports = function(get) {
 
     it('should support a default value as the last argument', function() {
       const fixture = { foo: { c: { d: 'e' } } };
-      assert.equal(get(fixture, 'foo.bar.baz', 'quz'), 'quz');
-      assert.equal(get(fixture, 'foo.bar.baz', true), true);
-      assert.equal(get(fixture, 'foo.bar.baz', false), false);
-      assert.equal(get(fixture, 'foo.bar.baz', null), null);
+      assert.strictEqual(get(fixture, 'foo.bar.baz', 'quz'), 'quz');
+      assert.strictEqual(get(fixture, 'foo.bar.baz', true), true);
+      assert.strictEqual(get(fixture, 'foo.bar.baz', false), false);
+      assert.strictEqual(get(fixture, 'foo.bar.baz', null), null);
     });
 
     it('should support options.default', function() {
       const fixture = { foo: { c: { d: 'e' } } };
-      assert.equal(get(fixture, 'foo.bar.baz', { default: 'qux' }), 'qux');
-      assert.equal(get(fixture, 'foo.bar.baz', { default: true }), true);
-      assert.equal(get(fixture, 'foo.bar.baz', { default: false }), false);
-      assert.equal(get(fixture, 'foo.bar.baz', { default: null }), null);
+      assert.strictEqual(get(fixture, 'foo.bar.baz', { default: 'qux' }), 'qux');
+      assert.strictEqual(get(fixture, 'foo.bar.baz', { default: true }), true);
+      assert.strictEqual(get(fixture, 'foo.bar.baz', { default: false }), false);
+      assert.strictEqual(get(fixture, 'foo.bar.baz', { default: null }), null);
       assert.deepStrictEqual(get(fixture, 'foo.bar.baz', { default: { one: 'two' } }), { one: 'two' });
     });
 
@@ -140,17 +140,17 @@ module.exports = function(get) {
         );
       };
 
-      assert.equal(get(fixture, 'foo.bar.baz', options('fez')), 'fez');
-      assert.equal(get(fixture, 'foo.bar.baz', options(true)), true);
-      assert.equal(get(fixture, 'foo.bar.baz', options(false)), false);
-      assert.equal(get(fixture, 'foo.bar.baz', options(null)), null);
+      assert.strictEqual(get(fixture, 'foo.bar.baz', options('fez')), 'fez');
+      assert.strictEqual(get(fixture, 'foo.bar.baz', options(true)), true);
+      assert.strictEqual(get(fixture, 'foo.bar.baz', options(false)), false);
+      assert.strictEqual(get(fixture, 'foo.bar.baz', options(null)), null);
 
-      assert.equal(get(fixture, 'foo.a.b.c', options('fez')), 'fez');
-      assert.equal(get(fixture, 'foo.a.b.c', options(true)), true);
-      assert.equal(get(fixture, 'foo.a.b.c', options(false)), false);
-      assert.equal(get(fixture, 'foo.a.b.c', options(null)), null);
+      assert.strictEqual(get(fixture, 'foo.a.b.c', options('fez')), 'fez');
+      assert.strictEqual(get(fixture, 'foo.a.b.c', options(true)), true);
+      assert.strictEqual(get(fixture, 'foo.a.b.c', options(false)), false);
+      assert.strictEqual(get(fixture, 'foo.a.b.c', options(null)), null);
 
-      assert.equal(get(fixture, 'foo.yyy', options('fez')), 'zzz');
+      assert.strictEqual(get(fixture, 'foo.yyy', options('fez')), 'zzz');
     });
 
     it('should get a value from an array', function() {
@@ -313,73 +313,73 @@ module.exports = function(get) {
 
     it('should return the value using unicode key', function() {
       const obj = { '15\u00f8C': { '3\u0111': 1 } };
-      assert.equal(get(obj, '15\u00f8C.3\u0111'), 1);
-      assert.equal(get(obj, ['15\u00f8C', '3\u0111']), 1);
+      assert.strictEqual(get(obj, '15\u00f8C.3\u0111'), 1);
+      assert.strictEqual(get(obj, ['15\u00f8C', '3\u0111']), 1);
     });
 
     it('should return the value using dot in key (with array of segments)', function() {
       const obj = { 'a.b': { 'looks.like': 1 } };
-      assert.equal(get(obj, ['a.b', 'looks.like']), 1);
+      assert.strictEqual(get(obj, ['a.b', 'looks.like']), 1);
     });
 
     // object-path fails this test
     it('should return the value using dot in key', function() {
       const obj = { 'a.b': { 'looks.like': 1 } };
-      assert.equal(get(obj, 'a.b.looks.like'), 1);
+      assert.strictEqual(get(obj, 'a.b.looks.like'), 1);
     });
 
     it('should return the value under shallow object', function() {
       const obj = getTestObj();
-      assert.equal(get(obj, 'a'), 'b');
-      assert.equal(get(obj, ['a']), 'b');
+      assert.strictEqual(get(obj, 'a'), 'b');
+      assert.strictEqual(get(obj, ['a']), 'b');
     });
 
     it('should work with number path', function() {
       const obj = getTestObj();
-      assert.equal(get(obj.b.d, 0), 'a');
-      assert.equal(get(obj.b, 0), undefined);
+      assert.strictEqual(get(obj.b.d, 0), 'a');
+      assert.strictEqual(get(obj.b, 0), undefined);
     });
 
     it('should return the value under deep object', function() {
       const obj = getTestObj();
-      assert.equal(get(obj, 'b.f'), 'i');
-      assert.equal(get(obj, ['b', 'f']), 'i');
+      assert.strictEqual(get(obj, 'b.f'), 'i');
+      assert.strictEqual(get(obj, ['b', 'f']), 'i');
     });
 
     it('should return the value under array', function() {
       const obj = getTestObj();
-      assert.equal(get(obj, 'b.d.0'), 'a');
-      assert.equal(get(obj, ['b', 'd', 0]), 'a');
+      assert.strictEqual(get(obj, 'b.d.0'), 'a');
+      assert.strictEqual(get(obj, ['b', 'd', 0]), 'a');
     });
 
     it('should return the value under array deep', function() {
       const obj = getTestObj();
-      assert.equal(get(obj, 'b.e.1.f'), 'g');
-      assert.equal(get(obj, ['b', 'e', 1, 'f']), 'g');
+      assert.strictEqual(get(obj, 'b.e.1.f'), 'g');
+      assert.strictEqual(get(obj, ['b', 'e', 1, 'f']), 'g');
     });
 
     it('should return undefined for missing values under object', function() {
       const obj = getTestObj();
-      assert.equal(get(obj, 'a.b'), undefined);
-      assert.equal(get(obj, ['a', 'b']), undefined);
+      assert.strictEqual(get(obj, 'a.b'), undefined);
+      assert.strictEqual(get(obj, ['a', 'b']), undefined);
     });
 
     it('should return undefined for missing values under array', function() {
       const obj = getTestObj();
-      assert.equal(get(obj, 'b.d.5'), undefined);
-      assert.equal(get(obj, ['b', 'd', '5']), undefined);
+      assert.strictEqual(get(obj, 'b.d.5'), undefined);
+      assert.strictEqual(get(obj, ['b', 'd', '5']), undefined);
     });
 
     it('should return the value under integer-like key', function() {
       const obj = { '1a': 'foo' };
-      assert.equal(get(obj, '1a'), 'foo');
-      assert.equal(get(obj, ['1a']), 'foo');
+      assert.strictEqual(get(obj, '1a'), 'foo');
+      assert.strictEqual(get(obj, ['1a']), 'foo');
     });
 
     it('should return the default value when the key doesnt exist', function() {
       const obj = { '1a': 'foo' };
-      assert.equal(get(obj, '1b', null), null);
-      assert.equal(get(obj, ['1b'], null), null);
+      assert.strictEqual(get(obj, '1b', null), null);
+      assert.strictEqual(get(obj, ['1b'], null), null);
     });
 
     // this test differs from behavior in object-path. I was unable to figure
@@ -388,7 +388,7 @@ module.exports = function(get) {
       const obj = { '1a': 'foo' };
       assert.deepStrictEqual(get(obj, '', null), null);
       assert.deepStrictEqual(get(obj, []), undefined);
-      assert.equal(get({}, ['1'], 'foo'), 'foo');
+      assert.strictEqual(get({}, ['1'], 'foo'), 'foo');
     });
 
     it('should return the default value when object is null or undefined', function() {
@@ -400,7 +400,7 @@ module.exports = function(get) {
       const foo = 'FOO';
       const objWithNullProto = Object.create(null);
       objWithNullProto.foo = foo;
-      assert.equal(get(objWithNullProto, 'foo'), foo);
+      assert.strictEqual(get(objWithNullProto, 'foo'), foo);
     });
 
     // this differs from object-path, which does not allow
@@ -419,10 +419,10 @@ module.exports = function(get) {
 
       const extended = new Extended();
 
-      assert.equal(get(extended, ['one', 'two']), true);
+      assert.strictEqual(get(extended, ['one', 'two']), true);
       extended.enabled = true;
 
-      assert.equal(get(extended, 'enabled'), true);
+      assert.strictEqual(get(extended, 'enabled'), true);
       assert.deepStrictEqual(get(extended, 'one'), { two: true });
     });
   });
@@ -432,7 +432,7 @@ module.exports = function(get) {
       const a = undefined;
       const b = {};
 
-      assert.equal(get(a, 'sample'), undefined);
+      assert.strictEqual(get(a, 'sample'), undefined);
       assert.deepStrictEqual(get(b, undefined), {});
       assert.deepStrictEqual(get(b, ''), undefined);
       assert.deepStrictEqual(get(b, '...'), undefined);
@@ -446,10 +446,10 @@ module.exports = function(get) {
         unknown: undefined
       };
 
-      assert.equal(get(a, 'example'), fn);
-      assert.equal(get(a, 'sample'), 'string');
-      assert.equal(get(a, 'unknown'), undefined);
-      assert.equal(get(a, 'invalid'), undefined);
+      assert.strictEqual(get(a, 'example'), fn);
+      assert.strictEqual(get(a, 'sample'), 'string');
+      assert.strictEqual(get(a, 'unknown'), undefined);
+      assert.strictEqual(get(a, 'invalid'), undefined);
     });
 
     it('should get deep properties', function() {
@@ -458,9 +458,9 @@ module.exports = function(get) {
         c: { example: { type: 'mineral' } }
       };
 
-      assert.equal(get(a, 'b.example.type'), 'vegetable');
-      assert.equal(get(a, 'c.example.type'), 'mineral');
-      assert.equal(get(a, 'c.gorky.type'), undefined);
+      assert.strictEqual(get(a, 'b.example.type'), 'vegetable');
+      assert.strictEqual(get(a, 'c.example.type'), 'mineral');
+      assert.strictEqual(get(a, 'c.gorky.type'), undefined);
     });
 
     it('should get properties on non-objects', function() {
@@ -477,9 +477,9 @@ module.exports = function(get) {
       // str.path = { to: { property: 'string' } };
       // num.path = { to: { property: 'string' } };
 
-      assert.equal(get(fn, 'path.to.property'), 'string');
-      // assert.equal(get(str, 'path.to.property'), undefined);
-      // assert.equal(get(num, 'path.to.property'), undefined);
+      assert.strictEqual(get(fn, 'path.to.property'), 'string');
+      // assert.strictEqual(get(str, 'path.to.property'), undefined);
+      // assert.strictEqual(get(num, 'path.to.property'), undefined);
     });
   });
 };
